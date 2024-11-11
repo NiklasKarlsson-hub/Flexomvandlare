@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexomvandlare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        input, button {
+            margin: 10px;
+            padding: 5px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Flexomvandlare</h2>
+    <p>Ange flex-tid i decimalformat (t.ex. 11.12):</p>
+    <input type="text" id="decimalTime" placeholder="Ange decimalformat">
+    <button onclick="convertTime()">Omvandla tid</button>
+
+    <p id="result"></p>
+
+    <script>
+        function convertTime() {
+            // Hämta inmatningen och dela upp den i timmar och decimaler
+            const input = document.getElementById("decimalTime").value;
+            const [hours, decimal] = input.split(".").map(Number);
+
+            if (isNaN(hours) || isNaN(decimal)) {
+                document.getElementById("result").innerText = "Ogiltig inmatning. Ange ett giltigt decimalvärde (exempel: 11.68)";
+                return;
+            }
+
+            // Omvandla decimalen till minuter (procent av 60 minuter)
+            const minutes = Math.round((decimal / 100) * 60);
+
+            // Visa resultatet
+            document.getElementById("result").innerText = `Du har ${hours} timmar och ${minutes} minuters flex`;
+        }
+    </script>
+
+</body>
+</html>
